@@ -35,7 +35,7 @@ echo 1>&2 '# Extracting .faa from .gbk'
 		echo 1>&2 "Error - already exists: ${INPUTS}/${STRAIN}.faa"
 		exit 1
 	    fi
-	    ./scripts/gbk2gembase < $GBK > ${INPUTS}/${STRAIN}.faa
+	    ${PIPELINE}/scripts/gbk2gembase < $GBK > ${INPUTS}/${STRAIN}.faa
 	done
     done
 )
