@@ -1,0 +1,10 @@
+# https://bioconda.github.io/recipes/macsyfinder/README.html
+# https://github.com/gem-pasteur/macsyfinder
+---
+image: pvstodghill/macsyfinder
+version: 2.1.2__2023-07-31
+commands:
+  - macsydata
+  - macsyfinder
+  - macsyprofile
+
