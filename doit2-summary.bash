@@ -11,23 +11,24 @@ mkdir -p ${SUMMARY}
 # Print summaries
 # ------------------------------------------------------------------------
 
+if [ "${REPLICON_NAMES}" ] ; then
+    cat "${REPLICON_NAMES}" | sed -e 's|\(.*\)\t\(.*\)|s/\1\t/\2\t/g|' > ${SUMMARY}/names.sed > ${SUMMARY}/names.sed
+else
+    touch ${SUMMARY}/names.sed
+fi
+
 for MODEL_DIR in ${MACSYFINDER}/* ; do
     MODEL=$(basename $MODEL_DIR)
-    echo ''
-    echo '#' $MODEL
-    echo ''
-    first=1
-    for STRAIN_DIR in $MODEL_DIR/* ; do
-	STRAIN=$(basename $STRAIN_DIR)
-	if [ "$first" ] ; then
-	    echo -n Strain$'\t'
-	    head -n4 ${STRAIN_DIR}/best_solution_summary.tsv | tail -n1
-	    first=
-	fi
-	tail -n+5 ${STRAIN_DIR}/best_solution_summary.tsv \
-	     | sed -e "s/^/$STRAIN\t/"
+    (
+	echo ''
+	echo '#' $MODEL
+	echo ''
+	cat $MODEL_DIR/*/best_solution_summary.tsv \
+	    | sed -f ${SUMMARY}/names.sed \
+	    | ${PIPELINE}/scripts/collapse-macsyfinder-summary
+    ) | tee ${SUMMARY}/${MODEL}.tsv 
+    
 
-    done
 done
 
 # ------------------------------------------------------------------------

@@ -14,6 +14,10 @@ MODELS+=" TFFscan"
 MODELS+=" CasFinder"
 MODELS+=" CONJScan"
 
+# # Sensible replicon names - needed because Prokka renames all of the
+# # replicons
+# REPLICON_NAMES=/.../names.txt
+
 # ------------------------------------------------------------------------
 
 # Uncomment to get packages from HOWTO
