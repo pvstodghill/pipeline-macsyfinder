@@ -15,19 +15,19 @@ echo 1>&2 '# Run MacSyFinder'
 
 for FAA in ${INPUTS}/*.faa ; do
     STRAIN=$(basename $FAA .faa)
-    for MODEL_DIR in ${INPUTS}/models/* ; do
-	MODEL=$(basename $MODEL_DIR)
-	mkdir -p ${MACSYFINDER}/${MODEL}
+    for PARTIAL_MODEL in ${MODELS} ; do
+	SAFE_PARTIAL_MODEL=$(echo $PARTIAL_MODEL | sed -e 's|/|__|g')
+	mkdir -p ${MACSYFINDER}/${SAFE_PARTIAL_MODEL}
 	(
 	    set -x
 	    ${HOWTO} macsyfinder \
 		     --mute \
-		     --models ${MODEL} all \
+		     --models ${PARTIAL_MODEL} all \
 		     --sequence-db $FAA \
 		     --db-type gembase \
 		     --replicon-topology circular \
 		     --models-dir ${INPUTS}/models/ \
-		     --out-dir ${MACSYFINDER}/${MODEL}/${STRAIN} \
+		     --out-dir ${MACSYFINDER}/${SAFE_PARTIAL_MODEL}/${STRAIN} \
 		     --index-dir data/tmp \
 		     --worker ${THREADS}
 	)

@@ -17,19 +17,18 @@ else
     touch ${SUMMARY}/names.sed
 fi
 
-for MODEL_DIR in ${MACSYFINDER}/* ; do
-    MODEL=$(basename $MODEL_DIR)
+for PARTIAL_MODEL in ${MODELS} ; do
+    SAFE_PARTIAL_MODEL=$(echo $PARTIAL_MODEL | sed -e 's|/|__|g')
     (
 	echo ''
-	echo '#' $MODEL
+	echo '#' $PARTIAL_MODEL
 	echo ''
-	cat $MODEL_DIR/*/best_solution_summary.tsv \
+	cat ${MACSYFINDER}/${SAFE_PARTIAL_MODEL}/*/best_solution_summary.tsv \
 	    | sed -f ${SUMMARY}/names.sed \
 	    | ${PIPELINE}/scripts/collapse-macsyfinder-summary
     ) | tee ${SUMMARY}/${MODEL}.tsv 
-    
-
 done
+echo ''
 
 # ------------------------------------------------------------------------
 # Done.

@@ -44,9 +44,14 @@ echo 1>&2 '# Extracting .faa from .gbk'
 
 echo 1>&2 '# Downloading models'
 mkdir -p ${INPUTS}/models
-for MODEL in ${MODELS} ; do
-    echo "## $MODEL"
-    macsydata install --target ${INPUTS}/models ${MODEL}
+for PARTIAL_MODEL in ${MODELS} ; do
+    BASE_MODEL="$(echo $PARTIAL_MODEL | sed -e 's|/.*||')"
+    if [ -d ${INPUTS}/models/"${BASE_MODEL}" ] ; then
+	# already downloaded
+	continue
+    fi
+    echo "## $BASE_MODEL"
+    macsydata install --target ${INPUTS}/models "${BASE_MODEL}"
 done
     
 # --------------------------------------------------
