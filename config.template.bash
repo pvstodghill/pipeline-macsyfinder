@@ -7,11 +7,11 @@
 # # Genomes to process
 GENOMES=FIXME
 
-# # Models to download and run (refer to MacSyFinder documentation)
+# # Models to download and run (refer to `macsydata available`)
 MODELS=
 MODELS+=" TXSScan/bacteria/diderm"
 #MODELS+=" TFFscan"
-#MODELS+=" CasFinder"
+MODELS+=" CasFinder"
 MODELS+=" CONJScan/Plasmids"
 
 # # Sensible replicon names - needed because Prokka renames all of the
