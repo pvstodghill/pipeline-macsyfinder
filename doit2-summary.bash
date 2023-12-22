@@ -26,7 +26,7 @@ for PARTIAL_MODEL in ${MODELS} ; do
 	cat ${MACSYFINDER}/${SAFE_PARTIAL_MODEL}/*/best_solution_summary.tsv \
 	    | sed -f ${SUMMARY}/names.sed \
 	    | ${PIPELINE}/scripts/collapse-macsyfinder-summary
-    ) | tee ${SUMMARY}/${MODEL}.tsv 
+    ) | tee ${SUMMARY}/${SAFE_PARTIAL_MODEL}.tsv 
 done
 echo ''
 
