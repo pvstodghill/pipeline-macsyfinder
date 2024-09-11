@@ -12,7 +12,7 @@ mkdir -p ${SUMMARY}
 # ------------------------------------------------------------------------
 
 if [ "${REPLICON_NAMES}" ] ; then
-    cat "${REPLICON_NAMES}" | sed -e 's|\(.*\)\t\(.*\)|s/\1\t/\2\t/g|' > ${SUMMARY}/names.sed > ${SUMMARY}/names.sed
+    cat "${REPLICON_NAMES}" | sed -e 's|\(.*\)\t\(.*\)|s/^\1\t/\2\t/g|' > ${SUMMARY}/names.sed > ${SUMMARY}/names.sed
 else
     touch ${SUMMARY}/names.sed
 fi
